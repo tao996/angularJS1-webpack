@@ -19,7 +19,7 @@ module.exports = {
         app:    path.resolve(APP_PATH, 'index.js'),
         vendor: [
             'jquery',
-            'angularjs',
+            'angularjs', 'angular-ui-router'
         ]
     },
     // 有多少个入口文件,就会生成多少个 js 文件
@@ -50,11 +50,9 @@ module.exports = {
             }
         ]
     },
-    // 添加插件,会自动生成一个 html 文件
-    // 如果你有自己的 html 文件,则不需要生成,但要在 html 中手动添加生成后的 js 的路径
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Hello World app',
+            title: 'AngularJS Demo',
             template: path.resolve(TEM_PATH, 'index.html'),
             filename: 'index.html',
             chunks: ['app'],
@@ -66,7 +64,8 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin("vendor","vendor/bundle.js"),
         new ExtractTextPlugin('[name].css'),
         new CopyWebpackPlugin([
-            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendor/bootstrap.min.css'}
+            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendor/bootstrap.min.css'},
+            { from: 'app/templates/tpls', to: 'templates/tpls'}
         ])
     ],
     devtool: 'eval-source-map',

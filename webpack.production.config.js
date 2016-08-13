@@ -17,6 +17,7 @@ module.exports = {
     // 三个入口文件
     entry: {
         app:    path.resolve(APP_PATH, 'index.js'),
+        mobile:    path.resolve(APP_PATH, 'mobile.js'), // 测试另一个入口文件
         vendor: [
             'jquery',
             'angularjs',
@@ -45,8 +46,6 @@ module.exports = {
             }
         ]
     },
-    // 添加插件,会自动生成一个 html 文件
-    // 如果你有自己的 html 文件,则不需要生成,但要在 html 中手动添加生成后的 js 的路径
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Hello World app',
@@ -55,13 +54,22 @@ module.exports = {
             chunks: ['app'],
             inject: 'html'
         }),
+        new HtmlWebpackPlugin({
+            title: 'Hello World Mobile',
+            template: path.resolve(TEM_PATH, 'mobile.html'),
+            filename: 'mobile.html',
+            chunks: ['mobile'],
+            inject: 'html'
+        }),
         // 使用 uglifyJs 压缩压缩
         new webpack.optimize.UglifyJsPlugin({minimize: true}),
         // 把入口文件打包成 vendors
         new webpack.optimize.CommonsChunkPlugin("vendor","vendor/bundle.js"),
         new ExtractTextPlugin('[name].css'),
+        // 将公共栏目复制到指定目录下
         new CopyWebpackPlugin([
-            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendor/bootstrap.min.css'}
+            { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendor/bootstrap.min.css'},
+            { from: 'app/templates/tpls', to: 'templates/tpls'}
         ])
     ]
 }

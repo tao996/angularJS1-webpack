@@ -8,7 +8,10 @@
 </head>
 <body ng-app="MyApp">
     <div ng-controller="MyCtrl">
-        <label for="label label-info">{{ text }}</label>
+        <div ui-view>默认内容</div>
+
+        <p><a ui-sref='home'>使用一段 HTML 字符串</a></p>
+        <p><a ui-sref='views'>视图嵌套</a></p>
     </div>
 </body>
 
