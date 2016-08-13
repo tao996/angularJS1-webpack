@@ -1,0 +1,29 @@
+{
+  "name": "ng1-webpack-frame",
+  "version": "1.0.0",
+  "description": "angularJS1 + webpack, 支持 scss, ES6,",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "angularjs": "^0.0.1",
+    "css-loader": "^0.23.1",
+    "babel-core": "^6.13.2",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.22.0",
+    "jquery": "^3.1.0",
+    "jshint": "^2.9.2",
+    "jshint-loader": "^0.8.3",
+    "node-sass": "^3.8.0",
+    "style-loader": "^0.13.1",
+    "sass-loader": "^4.0.0",
+    "url-loader": "^0.5.7",
+    "webpack-dev-server": "^1.14.1",
+    "webpack": "^1.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline",
+    "build": "webpack --progress --profile --colors --config webpack.production.config.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
