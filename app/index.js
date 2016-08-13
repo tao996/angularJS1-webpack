@@ -1,11 +1,6 @@
 require('./css/main.scss');
 
-var sub = require('./js/sub');
-
-var app = document.createElement('div');
-app.innerHTML = '<h1>Hello World</h1>';
-app.appendChild(sub());
-
-// document.body.appendChild(app);
-
-$('body').append(app)
+var myapp = angular.module('MyApp',[]);
+myapp.controller('MyCtrl',['$scope', function($scope){
+    $scope.text = 'Hello, AngularJS';
+}])

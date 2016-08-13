@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="vendor/bundle.js"></script>
 </head>
-<body>
-    <h3>Welcome to webpach! templates/index.html</h3>
+<body ng-app="MyApp">
+    <div ng-controller="MyCtrl">
+        <label for="label label-info">{{ text }}</label>
+    </div>
 </body>
+
 </html>
