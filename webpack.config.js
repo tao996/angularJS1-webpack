@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var args = require('yargs').argv;
 
 var path = require('path');
 var ROOT_PATH       = path.resolve(__dirname);
@@ -11,7 +12,8 @@ var APP_PATH        = path.resolve(ROOT_PATH, 'app');
 var APP_CSS_PATH    = path.resolve(APP_PATH,'css');
 var TEM_PATH        = path.resolve(APP_PATH, 'templates');
 var APP_JSX_PATH    = path.resolve(APP_PATH, 'js');
-var node_modules_dir = path.resolve(__dirname, 'node_modules');
+
+
 
 module.exports = {
     // 三个入口文件
@@ -66,17 +68,20 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendor/bootstrap.min.css'},
             { from: 'app/templates/tpls', to: 'templates/tpls'}
-        ])
+        ]),
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse( args.mock || false ))
+        })
     ],
     devtool: 'eval-source-map',
     devServer: {
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        progress: true,
+        // historyApiFallback: true,
+        // hot: true,
+        // inline: true,
+        // progress: true,
         proxy: { // 没有效果,为什么?
             '/api/*' : {
-                target: 'http://example.com',
+                target: 'http://localhost:9090',
                 secure: false
             }
         }

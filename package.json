@@ -7,10 +7,10 @@
     "angular-animate": "^1.5.8",
     "angular-mocks": "^1.5.8",
     "angular-ui-router": "^0.3.1",
+    "angularjs": "^0.0.1",
     "babel-core": "^6.13.2",
     "bootstrap": "^3.3.7",
     "copy-webpack-plugin": "^3.0.1",
-    "angularjs": "^0.0.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
@@ -18,8 +18,8 @@
     "jquery": "^3.1.0",
     "jshint": "^2.9.2",
     "jshint-loader": "^0.8.3",
-    "sass-loader": "^4.0.0",
     "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
@@ -27,8 +27,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
-    "build": "rm -rf ./build && webpack --progress --profile --colors --config webpack.production.config.js"
+    "start": "webpack-dev-server --hot --inline --mock --config webpack.config.js",
+    "build": "rm -rf ./build && webpack --progress --profile --colors --config webpack.production.config.js",
+    "mock": "json-server --watch mock/db.json --port 9090",
+    "mockdev": "npm run mock & npm run start"
   },
   "author": "",
   "license": "ISC"

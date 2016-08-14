@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var args = require('yargs').argv;
 
 var path = require('path');
 var ROOT_PATH       = path.resolve(__dirname);
@@ -20,7 +21,7 @@ module.exports = {
         mobile:    path.resolve(APP_PATH, 'mobile.js'), // 测试另一个入口文件
         vendor: [
             'jquery',
-            'angularjs',
+            'angularjs', 'angular-ui-router'
         ]
     },
     // 有多少个入口文件,就会生成多少个 js 文件
@@ -70,6 +71,9 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'vendor/bootstrap.min.css'},
             { from: 'app/templates/tpls', to: 'templates/tpls'}
-        ])
+        ]),
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse( args.mock || false ))
+        })
     ]
 }

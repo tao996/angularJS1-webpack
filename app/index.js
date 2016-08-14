@@ -1,4 +1,6 @@
 require('./css/main.scss');
+var env = __DEV__ ? require('./js/test.env') : require('./js/product.env');
+
 
 var myApp = angular.module('MyApp',['ui.router']);
 
@@ -7,8 +9,9 @@ myApp.run(['$rootScope','$state','$stateParams', function($rootScope, $state, $s
     $rootScope.$stateParams = $stateParams;
 }])
 
-myApp.controller('MyCtrl',['$scope', function($scope){
+myApp.controller('MyCtrl',['$scope','$http', function($scope, $http){
     $scope.text = 'Hello, AngularJS';
+    $http.get( env.API_URL + '/posts');
 }]);
 
 myApp.config(['$stateProvider', function($stateProvider){
